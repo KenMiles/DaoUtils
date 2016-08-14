@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>919b9119-d452-48e0-8280-85405568f183</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DaoUtilsCore</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)code\CodeKey.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)code\Coding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)code\ICoding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\AbstractDaoHelperFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\AbstractParametersReadHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\ColumnReadTypedValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\ColumnReadValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\CommandDisposedOfException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoCommandAbstract.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoCommandParameterHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoHelperAbstract.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoUtilsException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DaoParameterBuilderBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DataReaderHelperAbstract.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\DataTypeAdaptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)core\ParameterReadValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IStandardDaoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\ms\IDaoStructuredDataParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\ms\IDaoStructuredDataParameterInternal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\ms\IDaoStructuredDataParametersBuilderInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\ms\IMsDaoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IColumnHolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoHelperFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoParametersBuilderDirection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoParametersBuilderInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoParametersBuilderInputOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoParametersBuilderOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoQuery.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoSetupParametersHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IDaoCommandParameterHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IReadHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\IReadValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)def\utils\IDataTableBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\MsDaoCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\MsDaoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\MsDaoHelperFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\DaoCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\DaoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\DaoParameterBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\DataReaderHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\DaoHelperFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Standard\ParameterReadHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\DaoStructuredDataParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\DaoStructuredParameterBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ms\ParameterDataTableBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utils\DataTableBuilderColumn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utils\DataTableBuilderFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utils\TableBuilder.cs" />
+  </ItemGroup>
+</Project>

@@ -3,3 +3,12 @@
 ################################################################################
 
 /.svn
+/DaoUtils/DaoUtils/bin/Debug
+/DaoUtils/DaoUtils/obj/Debug
+/DaoUtils/DaoUtilsOracleCommon
+/DaoUtils/macros
+/DaoUtils/packages
+/DaoUtils/Tests
+/DaoUtils/TestsDaoUtilsCore/bin/Debug
+/DaoUtils/TestsDaoUtilsCore/obj/Debug
+/Dao.cs

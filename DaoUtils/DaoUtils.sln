@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoUtils", "DaoUtils\DaoUtils.csproj", "{1499A58E-6412-44C4-BB81-A8A8DD80202F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DaoUtilsCore", "DaoUtilsCore\DaoUtilsCore.shproj", "{919B9119-D452-48E0-8280-85405568F183}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DaoUtilsOracleCommon", "DaoUtilsOracleCommon\DaoUtilsOracleCommon.shproj", "{DA81413F-7648-4310-B148-21F7FE683E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsDaoUtilsCore", "TestsDaoUtilsCore\TestsDaoUtilsCore.csproj", "{B7F43EEB-8AA1-4DC9-A806-F601B447137B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "macros", "macros\macros.csproj", "{E6B96598-872D-49F0-AD20-8E719FDB1A23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{27A4A315-8F65-4C20-A66C-D5B24D594343}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DaoUtilsOracleCommon\DaoUtilsOracleCommon.projitems*{da81413f-7648-4310-b148-21f7fe683e4d}*SharedItemsImports = 13
+		DaoUtilsCore\DaoUtilsCore.projitems*{919b9119-d452-48e0-8280-85405568f183}*SharedItemsImports = 13
+		DaoUtilsCore\DaoUtilsCore.projitems*{b7f43eeb-8aa1-4dc9-a806-f601b447137b}*SharedItemsImports = 4
+		DaoUtilsCore\DaoUtilsCore.projitems*{27a4a315-8f65-4c20-a66c-d5b24d594343}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1499A58E-6412-44C4-BB81-A8A8DD80202F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1499A58E-6412-44C4-BB81-A8A8DD80202F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1499A58E-6412-44C4-BB81-A8A8DD80202F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1499A58E-6412-44C4-BB81-A8A8DD80202F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F43EEB-8AA1-4DC9-A806-F601B447137B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F43EEB-8AA1-4DC9-A806-F601B447137B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F43EEB-8AA1-4DC9-A806-F601B447137B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F43EEB-8AA1-4DC9-A806-F601B447137B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B96598-872D-49F0-AD20-8E719FDB1A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B96598-872D-49F0-AD20-8E719FDB1A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B96598-872D-49F0-AD20-8E719FDB1A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B96598-872D-49F0-AD20-8E719FDB1A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
