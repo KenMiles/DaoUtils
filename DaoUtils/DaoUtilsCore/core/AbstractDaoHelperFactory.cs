@@ -44,6 +44,7 @@ namespace DaoUtilsCore.core
         abstract protected TH CreateHelper(TCon connection, OpenConnection openConnection = OpenConnection.Background);
 
         abstract protected TCon CreateConnection(string connectionString);
+        abstract protected TBldr CreateConnectionStringBuilder(string connectionString);
 
         protected virtual void SetPassword(TBldr connectionStringBuilder, string password)
         {
@@ -90,5 +91,23 @@ namespace DaoUtilsCore.core
             return Helper(connectionStringBuilder, openConnection);
         }
 
+        public TH Helper(string connectionStringSansPassword, string encryptedPassword,
+            OpenConnection openConnection = OpenConnection.Background)
+        {
+            return Helper(CreateConnectionStringBuilder(connectionStringSansPassword), encryptedPassword, openConnection);
+        }
+
+        public TH Helper(string connectionString, OpenConnection openConnection = OpenConnection.Background)
+        {
+            try
+            {
+                return Helper(CreateConnection(connectionString), openConnection);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                throw;
+            }
+        }
     }
 }

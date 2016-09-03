@@ -23,6 +23,16 @@ namespace DaoUtilsCore.ms
             return new SqlConnection(connectionString);
         }
 
+        protected override SqlConnectionStringBuilder CreateConnectionStringBuilder(string connectionString)
+        {
+            return new SqlConnectionStringBuilder(connectionString);
+        }
+
+        protected override void SetPassword(SqlConnectionStringBuilder connectionStringBuilder, string password)
+        {
+            connectionStringBuilder.Password = password;
+        }
+
         protected override IMsDaoHelper CreateHelper(SqlConnection connection, OpenConnection openConnection = OpenConnection.Background)
         {
             return new MsDaoHelper(connection, openConnection);

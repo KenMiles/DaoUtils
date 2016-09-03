@@ -80,6 +80,7 @@
     <Compile Include="core\DataReaderHelperAbstractTests.cs" />
     <Compile Include="core\DataTypeAdaptorTests.cs" />
     <Compile Include="core\ParameterReadValueTest.cs" />
+    <Compile Include="ms\MsDaoHelperFactoryTests.cs" />
     <Compile Include="utils\DataTableBuilderColumnTests.cs" />
     <Compile Include="utils\TableBuilderBaseTests.cs" />
     <Compile Include="standard\DaoCommandTests.cs" />

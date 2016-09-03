@@ -93,6 +93,11 @@ namespace TestsDaoUtilsCore.core
             return new TestConnection {PassConnectionStr = connectionString};
         }
 
+        protected override DbConnectionStringBuilder CreateConnectionStringBuilder(string connectionString)
+        {
+            return new DbConnectionStringBuilder() { ConnectionString = connectionString };
+        }
+
         protected override MockHelper CreateHelper(TestConnection connection,
             OpenConnection openConnection = OpenConnection.Background)
         {
@@ -197,5 +202,44 @@ namespace TestsDaoUtilsCore.core
             CheckHelperFromBuilder(OpenConnection.Immediate);
             CheckHelperFromBuilder(OpenConnection.FirstAccess);
         }
+
+        private void CheckHelperFromConnectionStrAndEncryptedPassword(OpenConnection openConnectionWhen, string password, string encryptedPassword)
+        {
+            _coding.Setup(c => c.DecryptString(It.IsAny<string>())).Returns(password)
+                .Callback<string>(p => { Assert.AreEqual(encryptedPassword, p); }).Verifiable();
+            //hello="Hi There";goodbye="See You";Password="A Password"
+            var connectionStr = "hello=\"Hi There\";goodbye=\"See You\"";
+            var helper = _factory.Helper(connectionStr, encryptedPassword, openConnectionWhen);
+            Assert.IsNotNull(helper);
+            Assert.AreEqual(openConnectionWhen, helper.OpenConnection);
+            Assert.AreEqual($"{connectionStr};Password=\"{password}\"", helper.Connection.PassConnectionStr);
+            _coding.Verify();
+        }
+
+        [TestMethod]
+        public void HelperFromConnectionStrAndEncryptedPassword()
+        {
+            CheckHelperFromConnectionStrAndEncryptedPassword(OpenConnection.Background, "A Password", "And then Encrypted");
+            CheckHelperFromConnectionStrAndEncryptedPassword(OpenConnection.Immediate, "A Different Password", "And then Encrypted again");
+            CheckHelperFromConnectionStrAndEncryptedPassword(OpenConnection.FirstAccess, "Yet another Password", "And Encrypted yet again");
+        }
+
+        private void CheckHelperFromConnectionStr(OpenConnection openConnectionWhen, string connectionStr)
+        {
+            var helper = _factory.Helper(connectionStr, openConnectionWhen);
+            Assert.IsNotNull(helper);
+            Assert.AreEqual(openConnectionWhen, helper.OpenConnection);
+            Assert.AreEqual(connectionStr, helper.Connection.PassConnectionStr);
+            _coding.Verify();
+        }
+
+        [TestMethod]
+        public void HelperFromConnectionStr()
+        {
+            CheckHelperFromConnectionStr(OpenConnection.Background, "Background connection String");
+            CheckHelperFromConnectionStr(OpenConnection.Immediate, "Immediate connection String");
+            CheckHelperFromConnectionStr(OpenConnection.FirstAccess, "FirstAccess connection String");
+        }
+
     }
 }

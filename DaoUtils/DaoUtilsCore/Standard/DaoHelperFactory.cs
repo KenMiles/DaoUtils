@@ -38,5 +38,10 @@ namespace DaoUtils.Standard
         {
             return new SqlConnection(connectionString);
         }
+
+        protected override DbConnectionStringBuilder CreateConnectionStringBuilder(string connectionString)
+        {
+            return new DbConnectionStringBuilder() {ConnectionString = connectionString};
+        }
     }
 }

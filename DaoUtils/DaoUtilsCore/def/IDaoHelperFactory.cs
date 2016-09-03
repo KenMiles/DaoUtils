@@ -15,5 +15,7 @@ namespace DaoUtilsCore.def
         TH Helper(TCon connection, OpenConnection openConnection = OpenConnection.Background);
         TH Helper(TBldr connectionStringBuilder, OpenConnection openConnection = OpenConnection.Background);
         TH Helper(TBldr connectionStringBuilder, string encryptedPassword, OpenConnection openConnection = OpenConnection.Background);
+        TH Helper(string connectionStringSansPassword, string encryptedPassword, OpenConnection openConnection = OpenConnection.Background);
+        TH Helper(string connectionString, OpenConnection openConnection = OpenConnection.Background);
     }
 }
