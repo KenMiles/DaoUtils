@@ -16,8 +16,16 @@ namespace DaoUtilsCore.ms
     {
     }
 
-    class MsDaoHelperFactory : AbstractDaoHelperFactory<IMsDaoHelper, SqlConnectionStringBuilder, SqlConnection>, IMsDaoHelperFactory
+    public class MsDaoHelperFactory : AbstractDaoHelperFactory<IMsDaoHelper, SqlConnectionStringBuilder, SqlConnection>, IMsDaoHelperFactory
     {
+        public MsDaoHelperFactory()
+        {
+        }
+
+        public MsDaoHelperFactory(string applicationEncryptionKey) : base(applicationEncryptionKey)
+        {
+        }
+
         protected override SqlConnection CreateConnection(string connectionString)
         {
             return new SqlConnection(connectionString);
