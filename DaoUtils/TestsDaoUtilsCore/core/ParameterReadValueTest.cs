@@ -1,5 +1,5 @@
 ﻿using System;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.core;
 using DaoUtils.Standard;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

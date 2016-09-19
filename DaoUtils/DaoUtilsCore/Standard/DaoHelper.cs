@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.core;
 using DaoUtils.def;
 

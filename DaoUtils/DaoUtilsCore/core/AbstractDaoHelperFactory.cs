@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.code;
 using DaoUtils.Standard;
 using DaoUtilsCore.code;

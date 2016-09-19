@@ -1,5 +1,5 @@
 ﻿using System;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.Standard;
 using DaoUtilsCore.core;
 

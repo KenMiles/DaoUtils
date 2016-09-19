@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using DaoUtils.Standard;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtilsCore.core;
 using DaoUtilsCore.def;
 

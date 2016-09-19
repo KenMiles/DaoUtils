@@ -5,7 +5,7 @@ using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using DaoUtils.Standard;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtilsCore.core;
 
 namespace DaoUtils.core

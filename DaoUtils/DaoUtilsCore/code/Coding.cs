@@ -97,7 +97,7 @@ namespace DaoUtils.code
             return new[] {salt[7], salt[5], salt[3], salt[1]};
         }
 
-        private byte[] AppeadSalt(byte[] data)
+        private byte[] AppendSalt(byte[] data)
         {
             /*Random Salt has Two purposes 
              *   - ensure same password gets different output each time - so you can't find password by brute forcing encrypt password and compare
@@ -105,7 +105,7 @@ namespace DaoUtils.code
              *   
              * Also need to store lengths of salt and data - obscured them, but not sure needed
              */
-            if (data == null) return AppeadSalt(new byte[0]);
+            if (data == null) return AppendSalt(new byte[0]);
             var dataLength = data.Length;
             byte saltLen = (byte)(Math.Max(51 - data.Length, 15));
             byte[] salt = CreateRandomBytes(saltLen);
@@ -116,7 +116,7 @@ namespace DaoUtils.code
 
         private string Encrypt(byte[] plainData)
         {
-            byte[] plain = AppeadSalt(plainData);
+            byte[] plain = AppendSalt(plainData);
             byte[] encrypted = null;
             DoEncryptionTransform(EncryptionDirection.Encrypt, encryptor =>
             {

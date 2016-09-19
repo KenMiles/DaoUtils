@@ -2,7 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Data;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.Standard;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

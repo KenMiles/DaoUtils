@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.code;
 using DaoUtils.def;
 using DaoUtils.Standard;

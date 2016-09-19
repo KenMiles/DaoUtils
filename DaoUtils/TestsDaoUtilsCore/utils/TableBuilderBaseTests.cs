@@ -85,7 +85,7 @@ namespace TestsDaoUtilsCore.utils
         [TestMethod]
         public void BooleanColumn()
         {
-            var values = new bool[] { true, true, false, false, false };
+            var values = new bool[] { true, false,false, false, false };
             const string columnName = "Boolean.Column";
             var column = _uut.BooleanColumn(columnName);
             CheckSingleColumnTableCreated(columnName, typeof(bool));
@@ -341,7 +341,7 @@ namespace TestsDaoUtilsCore.utils
             const string columnName = "bool.Column";
             Assert.AreSame(_uut, _uut.Column(columnName, values));
             CheckSingleColumnTableCreated(columnName, values);
-            var values2 = new bool[] { false, false, true, false, true };
+            var values2 = new bool[] { false, false, false,false, true };
             Assert.AreSame(_uut, _uut.Column($"{columnName}.2", values2));
             CheckSingleColumnTableCreated($"{columnName}.2", values2);
         }
@@ -572,7 +572,7 @@ namespace TestsDaoUtilsCore.utils
             var columnUInt64 = _uut.UInt64Column("UInt64.Column");
             var columnBinary = _uut.BinaryColumn("Binary.Column");
 
-            var valuesBoolean = new bool[] { true, true, false, true, true };
+            var valuesBoolean = new bool[] { true, false,false, false,true };
             var valuesByte = new byte[] { 250, 17, 100, 223, 143 };
             var valuesChar = new char[] { ')', '@', 'b', 'w', 'g' };
             var valuesDateTime = new DateTime[] { new DateTime(1995, 11, 1), new DateTime(2001, 8, 19), new DateTime(1990, 1, 18), new DateTime(2007, 1, 5), new DateTime(1998, 3, 15) };
@@ -612,7 +612,7 @@ namespace TestsDaoUtilsCore.utils
 
             var table1 = _uut.BuildTable();
 
-            var valuesBoolean2 = new bool[] { true, true, false, true, false };
+            var valuesBoolean2 = new bool[] { true, false,false, false,false };
             var valuesByte2 = new byte[] { 28, 148, 70, 183, 4 };
             var valuesChar2 = new char[] { '^', '^', '=', '<', 'A' };
             var valuesDateTime2 = new DateTime[] { new DateTime(1993, 5, 17), new DateTime(2003, 5, 9), new DateTime(1996, 7, 16), new DateTime(2012, 8, 4), new DateTime(2005, 4, 1) };
@@ -697,7 +697,7 @@ namespace TestsDaoUtilsCore.utils
         [TestMethod]
         public void MultipleColumnsForArraysOf()
         {
-            var valuesBoolean = new bool[] { false, true, false, false, false };
+            var valuesBoolean = new bool[] { false, false,false, false, false };
             var valuesByte = new byte[] { 32, 126, 215, 49, 4 };
             var valuesChar = new char[] { '/', '\\', 'x', 't', 'v' };
             var valuesDateTime = new DateTime[] { new DateTime(2014, 9, 9), new DateTime(2011, 10, 25), new DateTime(2002, 9, 19), new DateTime(1998, 2, 20), new DateTime(1993, 1, 7) };

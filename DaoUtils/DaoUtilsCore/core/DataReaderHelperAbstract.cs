@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Common.Logging;
+using DaoUtilsCore.log;
 using DaoUtils.Standard;
 using DaoUtilsCore.core;
 

@@ -263,8 +263,8 @@ namespace TestsDaoUtilsCore.core
         [TestMethod]
         public void IsInputAndIsOutput()
         {
-            CheckIsInputAndIsOutput(ParameterDirection.Input, true, false);
-            CheckIsInputAndIsOutput(ParameterDirection.InputOutput, true, true);
+            CheckIsInputAndIsOutput(ParameterDirection.Input, true,false);
+            CheckIsInputAndIsOutput(ParameterDirection.InputOutput, true,true);
             CheckIsInputAndIsOutput(ParameterDirection.Output, false, true);
             CheckIsInputAndIsOutput(ParameterDirection.ReturnValue, false, true);
         }

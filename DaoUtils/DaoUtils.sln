@@ -13,10 +13,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "macros", "macros\macros.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{27A4A315-8F65-4C20-A66C-D5B24D594343}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Old.DaoUtilsOracleCommon", "DaoUtilsOracleCommon.old\Old.DaoUtilsOracleCommon.shproj", "{DA81413F-7648-4310-B148-21F7FE683E4D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DaoUtilsOracleCommon", "DaoUtilsOracleCommon\DaoUtilsOracleCommon.shproj", "{D8F00258-2188-494B-B49B-3767025AE0E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLogTest", "NLogTest\NLogTest.csproj", "{3A3EF6A3-0D9D-4BB5-894E-E9F9B88DC899}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DaoUtilsOracleCommon.old\DaoUtilsOracleCommon.projitems*{da81413f-7648-4310-b148-21f7fe683e4d}*SharedItemsImports = 13
 		DaoUtilsCore\DaoUtilsCore.projitems*{919b9119-d452-48e0-8280-85405568f183}*SharedItemsImports = 13
 		DaoUtilsCore\DaoUtilsCore.projitems*{b7f43eeb-8aa1-4dc9-a806-f601b447137b}*SharedItemsImports = 4
+		DaoUtilsOracleCommon\DaoUtilsOracleCommon.projitems*{d8f00258-2188-494b-b49b-3767025ae0e6}*SharedItemsImports = 13
+		DaoUtilsCore\DaoUtilsCore.projitems*{3a3ef6a3-0d9d-4bb5-894e-e9f9b88dc899}*SharedItemsImports = 4
+		DaoUtilsOracleCommon\DaoUtilsOracleCommon.projitems*{27a4a315-8f65-4c20-a66c-d5b24d594343}*SharedItemsImports = 4
 		DaoUtilsCore\DaoUtilsCore.projitems*{27a4a315-8f65-4c20-a66c-d5b24d594343}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +50,10 @@ Global
 		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27A4A315-8F65-4C20-A66C-D5B24D594343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A3EF6A3-0D9D-4BB5-894E-E9F9B88DC899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A3EF6A3-0D9D-4BB5-894E-E9F9B88DC899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A3EF6A3-0D9D-4BB5-894E-E9F9B88DC899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A3EF6A3-0D9D-4BB5-894E-E9F9B88DC899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
