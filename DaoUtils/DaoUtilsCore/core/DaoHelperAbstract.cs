@@ -160,18 +160,30 @@ namespace DaoUtils.core
 
         public string ParamPrefix => _paramPrefix = _paramPrefix ?? GetParamPrefix();
 
-        protected abstract IDaoCommand<TR, TCmd> CreateCommand(string commandText, DaoSetupParameters<TI, TIO, TO>  setupParameters);
+        protected abstract IDaoCommand<TR, TCmd> CreateCommand(string commandText, DaoSetupParameters<TI, TIO, TO>  setupParameters, bool storedProc);
 
         public IDaoCommand<TR, TCmd> NewCommand(string commandText, DaoSetupParameters<TI, TIO, TO> setupParameters)
         {
             WaitOpen();
-            return CreateCommand(commandText, setupParameters);
+            return CreateCommand(commandText, setupParameters, false);
         }
 
         public IDaoCommand<TR, TCmd> NewCommand(string commandText)
         {
             return NewCommand(commandText, helper => { });
         }
+
+        public IDaoCommand<TR, TCmd> NewStoredProc(string procedureName, DaoSetupParameters<TI, TIO, TO> setupParameters)
+        {
+            WaitOpen();
+            return CreateCommand(procedureName, setupParameters, true);
+        }
+
+        public IDaoCommand<TR, TCmd> NewStoredProc(string procedureName)
+        {
+            return NewStoredProc(procedureName, helper => { });
+        }
+
 
         protected abstract IDaoQuery<TR, TCmd> CreateQuery(string querySql, DaoSetupParameters<TI> setupParameters);
 
@@ -348,9 +360,9 @@ namespace DaoUtils.core
             return new DaoCommand(command, this).ExecuteNonQuery();
         }*/
 
-        public int[] ExecuteNonQuery(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters)
+        private int[] ExecuteNonQuery(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters, bool isStoredProc)
         {
-            using (var cmd = NewCommand(sql, setupParameters))
+            using (var cmd =  isStoredProc? NewStoredProc(sql, setupParameters) : NewCommand(sql, setupParameters))
             {
                 return cmd.ExecuteNonQuery();
             }
@@ -358,15 +370,25 @@ namespace DaoUtils.core
 
         public int[] ExecuteNonQuery(string sql)
         {
-            return ExecuteNonQuery(sql, helper => { });
+            return ExecuteNonQuery(sql, helper => { }, false);
         }
 
-        public List<T> ExecuteNonQuery<T>(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T, TR> onExecute)
+        public int[] ExecuteNonQuery(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters)
+        {
+            return ExecuteNonQuery(sql, setupParameters, false);
+        }
+
+        private List<T> ExecuteNonQuery<T>(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T, TR> onExecute, bool isStoredProc)
         {
             using (var cmd = NewCommand(sql, setupParameters))
             {
                 return cmd.ExecuteNonQuery(onExecute);
             }
+        }
+
+        public List<T> ExecuteNonQuery<T>(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T, TR> onExecute)
+        {
+            return ExecuteNonQuery(sql, setupParameters, onExecute, false);
         }
 
         public List<T> ExecuteNonQuery<T>(string sql, DaoOnExecute<T, TR> onExecute)
@@ -379,6 +401,24 @@ namespace DaoUtils.core
             return command.ExecuteNonQuery(onExecute);
         }
 
+        public int[] ExecuteStoredProc(string storedProcName, DaoSetupParameters<TI, TIO, TO> setupParameters)
+        {
+            return ExecuteNonQuery(storedProcName, setupParameters, true);
+        }
 
+        public int[] ExecuteStoredProc(string storedProcName)
+        {
+            return ExecuteNonQuery(storedProcName, helper => { }, true);
+        }
+
+        public List<T> ExecuteStoredProc<T>(string storedProcName, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T, TR> onExecute)
+        {
+            return ExecuteNonQuery(storedProcName, setupParameters, onExecute, true);
+        }
+
+        public List<T> ExecuteStoredProc<T>(string storedProcName, DaoOnExecute<T, TR> onExecute)
+        {
+            return ExecuteNonQuery(storedProcName, h => { }, onExecute, true);
+        }
     }
 }

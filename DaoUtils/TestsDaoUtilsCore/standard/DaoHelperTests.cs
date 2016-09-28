@@ -17,7 +17,7 @@ namespace TestsDaoUtilsCore.standard
 
         public IDaoCommand<IReadValue, IDbCommand> AccessCreateCommand(string commandText, DaoSetupParameters<IDaoParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput> setupParameters)
         {
-            return CreateCommand(commandText, setupParameters);
+            return CreateCommand(commandText, setupParameters, false);
         }
 
         public IDaoQuery<IReadValue, IDbCommand> AccessCreateQuery(string querySql, DaoSetupParameters<IDaoParametersBuilderInput> setupParameters)

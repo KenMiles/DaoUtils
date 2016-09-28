@@ -379,7 +379,7 @@ namespace TestsDaoUtilsCore.core
 
         private void DoValidateParameters(AccessDaoCommandParameterHelper uut, params string[] queryParams)
         {
-            uut.ValidateParameters(queryParams);
+            uut.ValidateParameters(queryParams, true);
         }
         private void DoValidateParameters(string expectedExceptionMessage, AccessDaoCommandParameterHelper uut, params string[] queryParams)
         {

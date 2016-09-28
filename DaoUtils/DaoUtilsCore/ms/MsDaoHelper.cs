@@ -24,12 +24,13 @@ namespace DaoUtilsCore.ms
             Log = log ?? StaticLog;
         }
 
-        private SqlCommand DbCommand(string commandText)
+        private SqlCommand DbCommand(string commandText, bool storedProc)
         {
             try
             {
                 var result = _connection.CreateCommand();
                 result.CommandText = commandText;
+                result.CommandType = storedProc ? CommandType.StoredProcedure : CommandType.Text;
                 return result;
             }
             catch (Exception e)
@@ -39,14 +40,14 @@ namespace DaoUtilsCore.ms
             }
         }
 
-        protected override IDaoCommand<IReadValue, SqlCommand> CreateCommand(string commandText, DaoSetupParameters<IDaoStructuredDataParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput> setupParameters)
+        protected override IDaoCommand<IReadValue, SqlCommand> CreateCommand(string commandText, DaoSetupParameters<IDaoStructuredDataParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput> setupParameters, bool storedProc)
         {
-            return  new MsDaoCommand(DbCommand(commandText), this).SetupParameters(setupParameters);
+            return  new MsDaoCommand(DbCommand(commandText, storedProc), this).SetupParameters(setupParameters);
         }
 
         protected override IDaoQuery<IReadValue, SqlCommand> CreateQuery(string querySql, DaoSetupParameters<IDaoStructuredDataParametersBuilderInput> setupParameters)
         {
-            return new MsDaoCommand(DbCommand(querySql), this).SetupParameters(setupParameters);
+            return new MsDaoCommand(DbCommand(querySql, false), this).SetupParameters(setupParameters);
         }
     }
 }

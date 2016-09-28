@@ -21,12 +21,13 @@ namespace DaoUtils.Standard
         }
 
 
-        private IDbCommand DbCommand(string commandText)
+        private IDbCommand DbCommand(string commandText, bool storedProc)
         {
             try
             {
                 var result = Connection.CreateCommand();
                 result.CommandText = commandText;
+                result.CommandType = storedProc ? CommandType.StoredProcedure : CommandType.Text;
                 return result;
             }
             catch (Exception e)
@@ -36,14 +37,14 @@ namespace DaoUtils.Standard
             }
         }
 
-        protected override IDaoCommand<IReadValue, IDbCommand> CreateCommand(string commandText, DaoSetupParameters<IDaoParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput> setupParameters)
+        protected override IDaoCommand<IReadValue, IDbCommand> CreateCommand(string commandText, DaoSetupParameters<IDaoParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput> setupParameters, bool storedProc)
         {
-            return new DaoCommand(DbCommand(commandText), this).SetupParameters(setupParameters);
+            return new DaoCommand(DbCommand(commandText, storedProc), this).SetupParameters(setupParameters);
         }
 
         protected override IDaoQuery<IReadValue, IDbCommand> CreateQuery(string querySql, DaoSetupParameters<IDaoParametersBuilderInput> setupParameters)
         {
-            return new DaoCommand(DbCommand(querySql), this).SetupParameters(setupParameters);
+            return new DaoCommand(DbCommand(querySql, false), this).SetupParameters(setupParameters);
         }
 
       }

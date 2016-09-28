@@ -35,6 +35,9 @@ namespace DaoUtils.Standard
         IDaoCommand<TR, TCmd> NewCommand(string commandText, DaoSetupParameters<TI, TIO, TO> setupParameters);
         IDaoCommand<TR, TCmd> NewCommand(string commandText);
 
+        IDaoCommand<TR, TCmd> NewStoredProc(string procedureName, DaoSetupParameters<TI, TIO, TO> setupParameters);
+        IDaoCommand<TR, TCmd> NewStoredProc(string procedureName);
+
         IDaoQuery<TR, TCmd> NewQuery(string querySql, DaoSetupParameters<TI> setupParameters);
         IDaoQuery<TR, TCmd> NewQuery(string querySql);
 
@@ -74,6 +77,12 @@ namespace DaoUtils.Standard
         List<T> ExecuteNonQuery<T>(string sql, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T,TR> onExecute);
         List<T> ExecuteNonQuery<T>(string sql, DaoOnExecute<T, TR> onExecute);
         List<T> ExecuteNonQuery<T>(IDaoCommand<TR, TCmd> command, DaoOnExecute<T, TR> onExecute);
+
+        int[] ExecuteStoredProc(string storedProcName, DaoSetupParameters<TI, TIO, TO> setupParameters);
+        int[] ExecuteStoredProc(string storedProcName);
+
+        List<T> ExecuteStoredProc<T>(string storedProcName, DaoSetupParameters<TI, TIO, TO> setupParameters, DaoOnExecute<T, TR> onExecute);
+        List<T> ExecuteStoredProc<T>(string storedProcName, DaoOnExecute<T, TR> onExecute);
     }
 
 

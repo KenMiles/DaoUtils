@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using DaoUtils.core;
 using DaoUtils.Standard;
 using DaoUtilsCore.def.ms;
+using System.Text.RegularExpressions;
 
 namespace DaoUtilsCore.ms
 {
@@ -29,6 +31,12 @@ namespace DaoUtilsCore.ms
         protected override IReadHelper<IReadValue> ReadHelper(IDataReader dataReader)
         {
             return new DataReaderHelper(dataReader);
+        }
+
+        private static readonly Regex VariableNameFinder = new Regex(@"(?<=\bDeclare[ \t\r\n]+@)\b[_a-zA-Z0-9]+\b", RegexOptions.IgnoreCase);
+        override protected string[] SqlVariableNames(string sql)
+        {
+            return (from Match match in VariableNameFinder.Matches(RemoveCommentsAndStringsFrom(sql)) select match.Value).ToArray();
         }
     }
 }

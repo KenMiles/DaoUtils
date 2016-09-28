@@ -11,6 +11,8 @@ namespace DaoUtils.Standard
         where TO : IDaoParametersBuilderOutput
     {
         IDaoParametersBuilderDirection<TI, TIO, TO> Name(string parameterName);
+        bool IgnoreQueryParamIssues { get; set; }
+        void IgnoreQueryParamNames(params string[] paramNames);
     }
 
     public interface IDaoSetupParametersHelper<out TI>

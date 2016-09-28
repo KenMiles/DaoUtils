@@ -11,7 +11,6 @@ using DaoUtilsCore.def;
 
 namespace DaoUtils.core
 {
-
     internal delegate void OnParameters(IDaoParameterInternal parameter);
     class DaoCommandStatics
     {
@@ -60,6 +59,7 @@ namespace DaoUtils.core
             Log = log??LogStatic;
             Command = command;
             _connectionInfo = connectionInfo;
+            IgnoreQueryParamIssues = Command.CommandType == CommandType.StoredProcedure;
             ValidateStatus();
         }
 
@@ -77,17 +77,30 @@ namespace DaoUtils.core
             return RemoveCommentsAndStringsRegex.Replace(sql, " ");
         }
 
-        protected string[] SqlParameterNames(string sql)
+        virtual protected string[] SqlVariableNames(string sql)
+        {
+            return new string[0];
+        }
+
+        virtual protected string[] SqlParameterNames(string sql)
         {
             _findParametersRegex = _findParametersRegex ?? string.Format(FindParametersRegexFmt, _connectionInfo.ParamPrefix);
             return (from Match match in Regex.Matches(RemoveCommentsAndStringsFrom(sql), _findParametersRegex) select match.Value).ToArray();
+        }
+
+        public bool IgnoreQueryParamIssues { get; set; }
+        private readonly List<string> _ignoreParamNames = new List<string>();
+        public void IgnoreQueryParamNames(params string[] paramNames)
+        {
+            _ignoreParamNames.AddRange(paramNames);
         }
 
 
         protected void AttachParameters()
         {
             var sqlParameterNames = SqlParameterNames(Command.CommandText);
-            Helper.ValidateParameters(sqlParameterNames);
+            var variableNames = _ignoreParamNames.Concat(SqlVariableNames(Command.CommandText));
+            Helper.ValidateParameters(sqlParameterNames, variableNames, IgnoreQueryParamIssues);
             var dictionaryCreated = Helper.ParamertersByName();
             Command.Parameters.Clear();
             /* Had an issue with Oracle 11 where it seem to bind by index even though names were used in sql & parameters
@@ -97,9 +110,16 @@ namespace DaoUtils.core
              */
             foreach (var sqlParameterName in sqlParameterNames)
             {
-                var paramter = dictionaryCreated[sqlParameterName.ToLower()].Parameter;
+                if (!dictionaryCreated.ContainsKey(sqlParameterName)) continue;
+                var paramter = dictionaryCreated[sqlParameterName].Parameter;
                 paramter.ParameterName = sqlParameterName;
                 Command.Parameters.Add(paramter);
+            }
+            var sqlParameterNamesCheck = new HashSet<string>(sqlParameterNames, StringComparer.InvariantCultureIgnoreCase);
+            var missed = dictionaryCreated.Where(c => !sqlParameterNamesCheck.Contains(c.Key)).Select(c => c.Value);
+            foreach (var param in missed)
+            {
+                Command.Parameters.Add(param);
             }
         }
 

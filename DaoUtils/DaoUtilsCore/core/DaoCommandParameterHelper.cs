@@ -144,15 +144,19 @@ namespace DaoUtils.core
             if (!parameterNames.Any()) return;
             errorList.Add($"{errorDescription}: {string.Join(", ", parameterNames)}");
         }
-
-        public void ValidateParameters(IEnumerable<string> queryParameterNames)
+        
+        public void ValidateParameters(IEnumerable<string> queryParameterNames, IEnumerable<string> ignoreParamNames, bool ignoreQueryParamsIsses)
         {
             var errors = new List<string>();
-            var queryParameters = queryParameterNames?.Select(name => name.ToLower()).ToList()??new List<string>();
+            var ignoreParams = new HashSet<string>(ignoreParamNames, StringComparer.InvariantCultureIgnoreCase);
+            var queryParameters = queryParameterNames?.Except(ignoreParams).Select(name => name.ToLower()).ToList()??new List<string>();
             var createdParameters = Parameters.Select(p => p.Name.ToLower()).ToList();
-            AddErrors(errors, "Missing Parameters", queryParameters.Except(createdParameters).ToArray());
-            AddErrors(errors, "Unknown Parameters", createdParameters.Except(queryParameters).ToArray());
-            AddErrors(errors, "Duplicated Query Parameters", queryParameters.GroupBy(name => name).Where(dup => dup.Count() > 1).Select(dup => dup.Key).ToArray());
+            if (!ignoreQueryParamsIsses)
+            {
+                AddErrors(errors, "Missing Parameters", queryParameters.Except(createdParameters).ToArray());
+                AddErrors(errors, "Unknown Parameters", createdParameters.Except(queryParameters).ToArray());
+                AddErrors(errors, "Duplicated Query Parameters", queryParameters.GroupBy(name => name).Where(dup => dup.Count() > 1).Select(dup => dup.Key).ToArray());
+            }
             AddErrors(errors, "Duplicated Added Parameters", createdParameters.GroupBy(name => name).Where(dup => dup.Count() > 1).Select(dup => dup.Key).ToArray());
             var paramList = Parameters.Where(p => p.InputParamArraySize > 0).GroupBy(p => p.InputParamArraySize).ToArray();
             if (paramList.Count() > 1)
@@ -172,7 +176,7 @@ namespace DaoUtils.core
 
         public Dictionary<string, IDaoParameterInternal> ParamertersByName()
         {
-            return Parameters.ToDictionary(p => p.Name.ToLower(), p => p, StringComparer.InvariantCultureIgnoreCase);
+            return Parameters.ToDictionary(p => p.Name, p => p, StringComparer.InvariantCultureIgnoreCase);
         }
 
     }

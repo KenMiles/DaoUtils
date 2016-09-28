@@ -12,7 +12,7 @@ namespace DaoUtilsCore.def
         void ReadReturnedParams(CommandActionDelegate onRead);
         void Execute(CommandExecuteMode mode, CommandActionDelegate onExecute);
         void RecordRow();
-        void ValidateParameters(IEnumerable<string> queryParameterNames);
+        void ValidateParameters(IEnumerable<string> queryParameterNames, IEnumerable<string> ignoreParamNames, bool ignoreQueryParamsIsses);
         Dictionary<string, IDaoParameterInternal> ParamertersByName();
     }
 }

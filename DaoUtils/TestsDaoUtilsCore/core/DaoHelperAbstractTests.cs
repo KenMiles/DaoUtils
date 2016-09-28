@@ -20,6 +20,7 @@ namespace TestsDaoUtilsCore.core
             DaoSetupParameters
                 <IDaoParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput>
             SetupParameters { get; set; }
+        public bool IsStoredProc { get; set; }
     }
 
     internal class QueryRequest
@@ -48,9 +49,10 @@ namespace TestsDaoUtilsCore.core
         protected override IDaoCommand<IReadValue, IDbCommand> CreateCommand(string commandText,
             DaoSetupParameters
                 <IDaoParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput>
-                setupParameters)
+                setupParameters, 
+            bool isStoredProc)
         {
-            CommandRequests.Add(new CommandRequest() {CommandText = commandText, SetupParameters = setupParameters});
+            CommandRequests.Add(new CommandRequest() {CommandText = commandText, SetupParameters = setupParameters, IsStoredProc = isStoredProc});
             return MockCommand.Object;
         }
 
