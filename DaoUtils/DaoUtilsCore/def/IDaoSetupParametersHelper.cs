@@ -13,6 +13,7 @@ namespace DaoUtils.Standard
         IDaoParametersBuilderDirection<TI, TIO, TO> Name(string parameterName);
         bool IgnoreQueryParamIssues { get; set; }
         void IgnoreQueryParamNames(params string[] paramNames);
+        int CommandTimeout { get; set; }
     }
 
     public interface IDaoSetupParametersHelper<out TI>

@@ -31,6 +31,10 @@ namespace DaoUtilsCore.ms
                 var result = _connection.CreateCommand();
                 result.CommandText = commandText;
                 result.CommandType = storedProc ? CommandType.StoredProcedure : CommandType.Text;
+                if (OverrideDefaultCommandTimeout.HasValue && OverrideDefaultCommandTimeout.Value > 30)
+                {
+                    result.CommandTimeout = OverrideDefaultCommandTimeout.Value;
+                }
                 return result;
             }
             catch (Exception e)
@@ -49,5 +53,7 @@ namespace DaoUtilsCore.ms
         {
             return new MsDaoCommand(DbCommand(querySql, false), this).SetupParameters(setupParameters);
         }
+
+        public int? OverrideDefaultCommandTimeout { get; set; }
     }
 }

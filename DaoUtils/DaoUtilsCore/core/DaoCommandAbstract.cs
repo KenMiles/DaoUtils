@@ -95,6 +95,8 @@ namespace DaoUtils.core
             _ignoreParamNames.AddRange(paramNames);
         }
 
+        public int CommandTimeout { get { return Command.CommandTimeout; } set { Command.CommandTimeout = value; } }
+
 
         protected void AttachParameters()
         {

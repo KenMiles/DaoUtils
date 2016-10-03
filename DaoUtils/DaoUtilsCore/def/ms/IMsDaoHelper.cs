@@ -9,5 +9,6 @@ namespace DaoUtilsCore.def.ms
 {
     public interface IMsDaoHelper : IDaoHelper<IDaoStructuredDataParametersBuilderInput, IDaoParametersBuilderInputOutput, IDaoParametersBuilderOutput, IReadValue, SqlCommand>
     {
+        int? OverrideDefaultCommandTimeout { get; set; }
     }
 }

@@ -104,7 +104,7 @@ namespace TestsDaoUtilsCore.core
                 .Verifiable();
             var paramNames = mockParams.Select(i => i.name).ToArray();
             var cmdText = string.Join(" ", paramNames.Select(s => $":{s}"));
-            helper.Setup(c => c.ValidateParameters(It.IsAny<IEnumerable<string>>(), false))
+            helper.Setup(c => c.ValidateParameters(It.IsAny<IEnumerable<string>>(), null, false))
                 .Callback<IEnumerable<string>>(c => { Assert.AreEqual(string.Join("|", paramNames), string.Join("|", c)); })
                 .Verifiable();
             paramters.Setup(c => c.Clear()).Verifiable();
