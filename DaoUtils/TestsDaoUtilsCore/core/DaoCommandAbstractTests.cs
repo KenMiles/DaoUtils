@@ -104,8 +104,11 @@ namespace TestsDaoUtilsCore.core
                 .Verifiable();
             var paramNames = mockParams.Select(i => i.name).ToArray();
             var cmdText = string.Join(" ", paramNames.Select(s => $":{s}"));
-            helper.Setup(c => c.ValidateParameters(It.IsAny<IEnumerable<string>>(), null, false))
-                .Callback<IEnumerable<string>>(c => { Assert.AreEqual(string.Join("|", paramNames), string.Join("|", c)); })
+            helper.Setup(c => c.ValidateParameters(It.IsAny<IEnumerable<string>>(), It.IsAny<IEnumerable<string>>(), false))
+                .Callback<IEnumerable<string>, IEnumerable<string>, bool>((c,ip,ii) =>
+                {
+                    Assert.AreEqual(string.Join("|", paramNames), string.Join("|", c));
+                })
                 .Verifiable();
             paramters.Setup(c => c.Clear()).Verifiable();
             connectionInfo.Setup(c => c.ParamPrefix).Returns(":").Verifiable();
@@ -135,10 +138,11 @@ namespace TestsDaoUtilsCore.core
         private readonly Mock<IDaoCommandParameterHelper> _helper = new Mock<IDaoCommandParameterHelper>(MockBehavior.Strict);
 
         private TestableDaoCommandAbstract _testing;
-
+        private CommandType _commandType = CommandType.Text;
         [TestInitialize]
         public void SetUp()
         {
+            _command.SetupGet(p => p.CommandType).Returns(_commandType);
             _testing = new TestableDaoCommandAbstract(_command.Object, _connectionInfo.Object, _helper.Object, _log.Object);
             _command.Setup(p => p.Parameters).Returns(_paramters.Object);
             _log.Setup(l => l.Error(It.IsAny<object>(), It.IsAny<Exception>())).Callback<object, Exception>(

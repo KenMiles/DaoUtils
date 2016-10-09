@@ -37,6 +37,7 @@ namespace TestsDaoUtilsCore.standard
         [TestInitialize]
         public void Setup()
         {
+            _dbCmd.Setup(a => a.CommandType).Returns(CommandType.Text);
             _command = new DaoCommandAccess(_dbCmd.Object, _info.Object);
         }
 

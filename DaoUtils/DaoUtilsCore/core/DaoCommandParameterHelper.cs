@@ -149,7 +149,7 @@ namespace DaoUtils.core
         {
             var errors = new List<string>();
             var ignoreParams = new HashSet<string>(ignoreParamNames, StringComparer.InvariantCultureIgnoreCase);
-            var queryParameters = queryParameterNames?.Except(ignoreParams).Select(name => name.ToLower()).ToList()??new List<string>();
+            var queryParameters = queryParameterNames?.Where(c => !ignoreParams.Contains(c)).Select(name => name.ToLower()).ToList()??new List<string>();
             var createdParameters = Parameters.Select(p => p.Name.ToLower()).ToList();
             if (!ignoreQueryParamsIsses)
             {

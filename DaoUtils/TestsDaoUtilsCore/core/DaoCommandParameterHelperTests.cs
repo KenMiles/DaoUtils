@@ -379,7 +379,7 @@ namespace TestsDaoUtilsCore.core
 
         private void DoValidateParameters(AccessDaoCommandParameterHelper uut, params string[] queryParams)
         {
-            uut.ValidateParameters(queryParams, null, true);
+            uut.ValidateParameters(queryParams, new string[0], false);
         }
         private void DoValidateParameters(string expectedExceptionMessage, AccessDaoCommandParameterHelper uut, params string[] queryParams)
         {
@@ -460,7 +460,7 @@ namespace TestsDaoUtilsCore.core
             var paramList = names.Select(p => Named(p)).ToArray();
             var uut = UnderTest(paramList);
             var byName = uut.ParamertersByName();
-            CheckArrays.CheckEqual("Names", names.Select(n => n.ToLower()), byName.Keys);
+            CheckArrays.CheckEqual("Names", byName.Keys, names.Select(n => n));
             for (var idx = 0; idx < names.Length; idx++)
             {
                 Assert.AreEqual(paramList[idx].Object, byName[names[idx]]);

@@ -51,6 +51,8 @@ namespace TestsDaoUtilsCore.standard
                 .Callback<string>(cmd => _command.Setup(c => c.CommandText).Returns(sql))
                 .Verifiable();
             _command.Setup(c => c.Parameters).Returns(_paramCollection.Object);
+            _command.SetupSet(c => c.CommandType = CommandType.Text);
+            _command.Setup(c => c.CommandType).Returns(CommandType.Text);
         }
 
         private Mock<IDbDataParameter> MockParameter(string name, ParameterDirection direction, int paramSize, DbType type)
